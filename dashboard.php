@@ -66,15 +66,11 @@ include('db-connect.php');
       <div class="container-fluid">
 
         <!-- Main content goes here -->
-
-
-
-
-
-
-
-
-
+        <h3 style="margin-left: 200px;">Welcome to Taylor's University Student Management System</h3>
+        <img src="taylors.jpg" alt="" srcset="" style="margin-left: 250px;">
+        <h4 style="margin-left: 240px;">Please select an option in the navigation bar to begin.</h4>
+        <br>
+        <h4 style="padding-left: 500px"><------</h4>
 
       </div>
       <!-- /.container-fluid -->

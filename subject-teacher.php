@@ -14,7 +14,7 @@ include('db-connect.php');
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Class Page</title>
+  <title>Subject Page</title>
 
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,9 +55,9 @@ include('db-connect.php');
     <?php 
 
     if ($_SESSION['role'] == "admin") {
-      include('sidebar-nav-admin.php');
+        include('sidebar-nav-admin.php');
     } else if ($_SESSION['role'] == "teacher") {
-      include('sidebar-nav-teacher.php');
+        include('sidebar-nav-teacher.php');
     }
 
     ?>
@@ -67,37 +67,32 @@ include('db-connect.php');
 
         <!-- Main content goes here -->
         <div class="card">
-            <h5 class="card-header">Class Records</h5>
+            <h5 class="card-header">Subject Records</h5>
             <div class="card-body">
-                <p class="card-text">The information displayed below are all of the credentials for class records.</p>
-                <a href="addClass.php"><button type="button" class="btn btn-dark">Add Class</button></a>
+                <p class="card-text">The information displayed below are all of the credentials for subject records.</p>
                 <br><br>
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Class ID</th>
-                                <th>Class Name</th>
-                                <th>Year Form</th>
-                                <th>Year Grade</th>
-                                <th>Modify</th>
+                                <th>Subject ID</th>
+                                <th>Subject Name</th>
+                                <th>Subject Type</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
 
-                            $sql = "SELECT * FROM class";
+                            $sql = "SELECT * FROM subjects";
                             $result = $conn->query($sql);
                             $rownum = $result->num_rows;
 
                             while ($row = $result->fetch_assoc()) {
-                              echo
-                                '<tr>
-                                  <td>' . $row['classId'] . '</td>
-                                  <td>' . $row['className'] . '</td>															
-                                  <td>' . $row['yearForm'] . '</td>
-                                  <td>' . $row['yearGrade'] . '</td>
-                                  <td><button class="btn px-0 btn-primary btn-block" type="button" onclick="window.location.href=\'classModify.php?id=' . $row['id'] . '\'">Modify</button></td>                          
+                                echo
+                                    '<tr>
+                                  <td>' . $row['subjectId'] . '</td>
+                                  <td>' . $row['subjectName'] . '</td>															
+                                  <td>' . $row['subjectType'] . '</td>                         
                                 </tr>';
                             }
 

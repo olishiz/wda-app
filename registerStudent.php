@@ -4,7 +4,7 @@ include('db-connect.php');
 
 $id = $_GET['id'];
 $sqlStatus = $msg = "";
-$classIdErr = "";
+$classIdErr = $yearFormErr = $yearGradeErr = "";
 $classStatus = "";
 
 function test_input($data)
@@ -17,7 +17,7 @@ function test_input($data)
 
 if (isset($_POST['registerStudent'])) {
 
-    $classId = "";
+    $classId = $yearForm = $yearGrade = "";
     
     // server side validation
     if (empty($_POST['classId'])) {
@@ -25,9 +25,12 @@ if (isset($_POST['registerStudent'])) {
         $classStatus = "false";
     } else {
         $classId = test_input($_POST['classId']);
+        $yearForm = test_input($_POST['yearForm']);
+        $yearGrade = test_input($_POST['yearGrade']);
+
         $classStatus = "true";
 
-        $sql = "SELECT classId FROM class WHERE classId = '$classId'";
+        $sql = "SELECT classId, yearForm, yearGrade FROM class WHERE classId = '$classId' AND yearForm = '$yearForm' AND yearGrade = '$yearGrade'";
         $result = $conn->query($sql);
 
         $row = $result->fetch_assoc();
@@ -38,7 +41,9 @@ if (isset($_POST['registerStudent'])) {
         } else {
 
             $sql2 = "UPDATE students SET
-                     classId = '$classId'
+                     classId = '$classId',
+                     yearForm = '$yearForm',
+                     yearGrade = '$yearGrade'
                      WHERE id = $id";
 
             if ($conn->query($sql2) === true) {
@@ -52,10 +57,6 @@ if (isset($_POST['registerStudent'])) {
         }
 
     }
-
-
-
-
 
 }
 
@@ -141,7 +142,7 @@ if (isset($_POST['registerStudent'])) {
                 echo "<button class=\"btn btn-lg btn-danger btn-block\">" . $msg . "</button><br>";
             }
             ?>
-                <p class="card-text">In this section, you will be able to register student into the available classes by inserting the Class ID.</p>
+                <p class="card-text">In this section, you will be able to register student into the available classes by inserting the Class ID, Year Form and Year Grade.</p>
                 <div class="panel-body">
                         <form action="" method="post">
                             <div class="form-group">
@@ -149,7 +150,59 @@ if (isset($_POST['registerStudent'])) {
                                 <input class="form-control" placeholder="Class ID" name="classId" type="text" style="width: 300px;">    
                                 <span class="error"><?php echo $classIdErr; ?></span>                     
                             </div>
-
+                            <label for="">Year Form</label>
+                            <div class="row align-items-center ml-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="yearForm" id="exampleRadios1" value="Form 1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Form 1
+                                    </label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="yearForm" id="exampleRadios2" value="Form 2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        Form 2
+                                    </label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="yearForm" id="exampleRadios3" value="Form 3">
+                                    <label class="form-check-label" for="exampleRadios3">
+                                        Form 3
+                                    </label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="yearForm" id="exampleRadios4" value="Form 4">
+                                    <label class="form-check-label" for="exampleRadios4">
+                                        Form 4
+                                    </label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="yearForm" id="exampleRadios5" value="Form 5">
+                                    <label class="form-check-label" for="exampleRadios5">
+                                        Form 5
+                                    </label>
+                                </div>
+                            </div>
+                            <label for="" class="mt-2">Year Grade</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="yearGrade" id="exampleRadios1" value="Lower Secondary" checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Lower Secondary
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="yearGrade" id="exampleRadios2" value="Upper Secondary Science">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Upper Secondary Science
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="yearGrade" id="exampleRadios3" value="Upper Secondary Art">
+                                <label class="form-check-label" for="exampleRadios3">
+                                    Upper Secondary Art
+                                </label>
+                            </div>  
+                            <br>
                             <div class="form-group text-left">
                                 <label for="">Student No.</label>  
                                 <input class="form-control text-left" placeholder="Student No." name="studentNo" type="text" style="width: 300px;" 
@@ -158,10 +211,7 @@ if (isset($_POST['registerStudent'])) {
                                         while ($row = $result->fetch_assoc()) {
                                             echo $row['studentNo'];
                                         }
-                                        ?>" readonly>    
-                                <small class="form-text text-muted">
-                                Note: Must only consists of 6 numeric values from [1-9]. Starting with 0 is invalid.
-                                </small>                                                      
+                                        ?>" readonly>                                                         
                             </div>
                             <div class="form-group">
                                 <label for="">Full Name</label>                                

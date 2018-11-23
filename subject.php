@@ -69,7 +69,7 @@ include('db-connect.php');
         <div class="card">
             <h5 class="card-header">Subject Records</h5>
             <div class="card-body">
-                <p class="card-text">The information displayed below are all of the credentials for student records.</p>
+                <p class="card-text">The information displayed below are all of the credentials for subject records.</p>
                 <a href="addSubject.php"><button type="button" class="btn btn-dark">Add Subject</button></a>
                 <br><br>
                 <div class="table-responsive">

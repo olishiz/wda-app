@@ -73,7 +73,7 @@ include('db-connect.php');
                 <a href="addStudent.php"><button type="button" class="btn btn-dark">Add Student</button></a>
                 <br><br>
                 <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
+                    <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Student No.</th>

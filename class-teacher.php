@@ -55,9 +55,9 @@ include('db-connect.php');
     <?php 
 
     if ($_SESSION['role'] == "admin") {
-      include('sidebar-nav-admin.php');
+        include('sidebar-nav-admin.php');
     } else if ($_SESSION['role'] == "teacher") {
-      include('sidebar-nav-teacher.php');
+        include('sidebar-nav-teacher.php');
     }
 
     ?>
@@ -70,7 +70,6 @@ include('db-connect.php');
             <h5 class="card-header">Class Records</h5>
             <div class="card-body">
                 <p class="card-text">The information displayed below are all of the credentials for class records.</p>
-                <a href="addClass.php"><button type="button" class="btn btn-dark">Add Class</button></a>
                 <br><br>
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
@@ -80,7 +79,6 @@ include('db-connect.php');
                                 <th>Class Name</th>
                                 <th>Year Form</th>
                                 <th>Year Grade</th>
-                                <th>Modify</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,13 +89,12 @@ include('db-connect.php');
                             $rownum = $result->num_rows;
 
                             while ($row = $result->fetch_assoc()) {
-                              echo
-                                '<tr>
+                                echo
+                                    '<tr>
                                   <td>' . $row['classId'] . '</td>
                                   <td>' . $row['className'] . '</td>															
                                   <td>' . $row['yearForm'] . '</td>
-                                  <td>' . $row['yearGrade'] . '</td>
-                                  <td><button class="btn px-0 btn-primary btn-block" type="button" onclick="window.location.href=\'classModify.php?id=' . $row['id'] . '\'">Modify</button></td>                          
+                                  <td>' . $row['yearGrade'] . '</td>                         
                                 </tr>';
                             }
 
